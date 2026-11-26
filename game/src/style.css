@@ -1,0 +1,64 @@
+/* CALDERA RUN — HUD and title screens. Amber instruments on smoked glass,
+   big enough to read when the screenshot is shrunk to a contact sheet. */
+html, body { margin: 0; height: 100%; overflow: hidden; background: #10141c; }
+#game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+#status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#hud { position: fixed; inset: 0; pointer-events: none; font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: #ffe9c4; }
+
+.hud { position: absolute; display: flex; gap: 10px; }
+#hud.title-mode .hud { display: none; }
+.hud-top { top: 14px; left: 0; right: 0; justify-content: center; align-items: flex-start; }
+.hud-left { left: 14px; top: 96px; flex-direction: column; }
+.hud-bottom { bottom: 14px; left: 0; right: 0; flex-direction: column; align-items: center; gap: 6px; }
+.hud-center { left: 50%; top: 54%; transform: translate(-50%, -50%); flex-direction: column; align-items: center; }
+
+.panel {
+  background: rgba(12, 16, 24, 0.62);
+  border: 1px solid rgba(255, 176, 46, 0.55);
+  border-radius: 10px;
+  padding: 8px 14px;
+  box-shadow: 0 0 18px rgba(255, 150, 40, 0.18), inset 0 0 24px rgba(255, 176, 46, 0.08);
+  backdrop-filter: blur(2px);
+  display: flex; align-items: baseline; gap: 8px;
+}
+.lbl { font-size: 12px; letter-spacing: 2px; color: #ffb02e; font-weight: 700; }
+.val { font-size: 34px; font-weight: 800; line-height: 1; color: #fff3da; text-shadow: 0 0 12px rgba(255, 176, 46, 0.65); font-variant-numeric: tabular-nums; }
+.val.sm { font-size: 16px; }
+.unit { font-size: 12px; letter-spacing: 1px; color: #ffcf7d; }
+
+.compass { flex-direction: column; align-items: center; gap: 2px; padding: 6px 10px 8px; min-width: 380px; overflow: hidden; }
+.compass .strip { position: relative; height: 20px; width: 360px; overflow: hidden; }
+.compass .tick { position: absolute; left: 50%; top: 0; font-size: 14px; font-weight: 700; color: #ffe9c4; margin-left: -6px; white-space: nowrap; }
+.compass .needle { color: #ff5040; font-size: 13px; line-height: 1; margin-top: -2px; }
+.compass .val { font-size: 22px; }
+
+.gauge { flex-direction: column; gap: 8px; padding: 12px 14px; min-width: 250px; }
+.gauge-row { display: flex; align-items: center; gap: 8px; }
+.bar { flex: 1; height: 10px; background: rgba(255, 255, 255, 0.12); border-radius: 5px; overflow: hidden; }
+.bar div { height: 100%; background: #ffb02e; border-radius: 5px; transition: width 0.15s linear; }
+#dmg-fill { background: #ff5040; }
+.horizon { position: relative; width: 120px; height: 60px; margin: 0 auto; border: 1px solid rgba(255, 176, 46, 0.55); border-radius: 60px; overflow: hidden; background: #1a2c44; }
+.horizon-sky { position: absolute; left: -20%; top: -60%; width: 140%; height: 90%; background: linear-gradient(#7ec8e8, #f2b36b); }
+.horizon-line { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #fff; }
+.horizon-plane { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #ffb02e; font-size: 18px; text-shadow: 0 0 8px #000; }
+
+.mission { gap: 18px; font-weight: 700; letter-spacing: 1px; font-size: 15px; }
+.mission #mission-name { color: #ffb02e; }
+.mission #mission-score { color: #fff3da; }
+.banner { font-size: 22px; font-weight: 800; letter-spacing: 1px; color: #fff3da; text-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 22px rgba(255,176,46,0.5); transition: opacity 0.3s; min-height: 28px; }
+.hint { font-size: 13px; color: rgba(255, 233, 196, 0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.8); transition: opacity 0.3s; }
+.reticle { font-size: 26px; color: rgba(255, 233, 196, 0.9); text-shadow: 0 0 8px rgba(0,0,0,0.9); }
+.target-label { font-size: 15px; font-weight: 700; letter-spacing: 1px; color: #ffe9c4; text-shadow: 0 1px 8px rgba(0,0,0,0.9); margin-top: 6px; white-space: nowrap; }
+
+.screen-title { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; background: linear-gradient(rgba(8,10,16,0.25), rgba(8,10,16,0.55)); }
+.title-inner { text-align: center; max-width: 860px; padding: 24px; pointer-events: auto; }
+.title-kicker { letter-spacing: 6px; font-size: 14px; color: #ffb02e; font-weight: 700; }
+.title-inner h1 { font-size: 84px; margin: 6px 0 4px; letter-spacing: 4px; color: #fff3da; text-shadow: 0 4px 30px rgba(255, 140, 40, 0.55), 0 2px 6px rgba(0,0,0,0.8); line-height: 1; }
+.title-sub { font-size: 19px; color: #ffe9c4; text-shadow: 0 1px 8px rgba(0,0,0,0.9); }
+.sorties { display: flex; gap: 14px; margin: 26px 0 18px; justify-content: center; }
+.sortie { pointer-events: auto; cursor: pointer; width: 240px; padding: 16px 14px; border-radius: 12px; background: rgba(12, 16, 24, 0.66); border: 1px solid rgba(255, 176, 46, 0.6); box-shadow: 0 0 20px rgba(255, 150, 40, 0.15); transition: transform 0.12s, box-shadow 0.12s; }
+.sortie:hover { transform: translateY(-3px); box-shadow: 0 6px 28px rgba(255, 150, 40, 0.35); border-color: #ffb02e; }
+.sortie-key { display: inline-block; width: 26px; height: 26px; line-height: 26px; border-radius: 50%; background: #ffb02e; color: #14161c; font-weight: 800; margin-bottom: 8px; }
+.sortie-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+.sortie-tag { font-size: 13px; color: #ffcf7d; margin-top: 6px; line-height: 1.4; }
+.title-foot { font-size: 14px; color: rgba(255, 233, 196, 0.9); text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
